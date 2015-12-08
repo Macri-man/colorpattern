@@ -13,8 +13,8 @@ SDL_Window *win = NULL;
 SDL_Texture *texture=NULL;
 SDL_Surface *surface=NULL;
 
-std::random_device seeder;
-std::mt19937 engine(seeder());
+random_device seeder;
+mt19937 engine(seeder());
 
 struct Grid {
 	int width;
@@ -51,9 +51,9 @@ Color color[6] ={
 	{ "#FFA500", 255, 165, 0,   "Orange", 0},
 	{ "#008000", 0,   128, 0,   "Green" , 0},
 	{ "#0000FF", 0,   0,   255, "Blue"  , 0},
-}
+};
 
-struct Board{
+struct Board {
 	SDL_Rect r;
 	Color color;
 	Board(SDL_Rect newr,Color newcolor){
@@ -110,7 +110,6 @@ void getInput(){
         				case SDL_BUTTON_LEFT:
         				case SDL_BUTTON_MIDDLE:
         				case SDL_BUTTON_RIGHT:
-        					calcpoint(e.x,e.y);
         			}
         			break;
         		default:
@@ -148,6 +147,7 @@ int main(int argc, char **argv){
         fprintf(stderr, "Error: Unable to init SDL: %s\n", SDL_GetError());
         exit(1);
     }
+
     Grid grid=Grid();
 
     win=SDL_CreateWindow("Color Matching", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,grid.width, grid.height,SDL_WINDOW_SHOWN);
@@ -164,6 +164,7 @@ int main(int argc, char **argv){
     	fprintf(stderr, "Create Surface failed: %s\n", SDL_GetError());
         exit(-1);
     }
+    
     TTF_Font *font;
 
     SDL_Rect r;
@@ -190,6 +191,7 @@ int main(int argc, char **argv){
 
 	SDL_FreeSurface(surface);
 	SDL_DestroyWindow(win);
+	TTF_Quit()
     SDL_Quit();
 
 	return 0;
